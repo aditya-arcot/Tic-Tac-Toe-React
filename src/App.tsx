@@ -1,5 +1,11 @@
+import Square from './Square'
+
 function App() {
-    return <></>
+    return (
+        <>
+            <Square />
+        </>
+    )
 }
 
 export default App
