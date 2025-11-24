@@ -4,13 +4,16 @@ import Square from './Square'
 type SquareValue = string | null
 
 export default function Board() {
+    const [isFirstPlayer, setIsFirstPlayer] = useState(true)
     const [squareValues, setSquareValues] = useState<SquareValue[]>(
         Array(9).fill(null)
     )
 
     const handleSquareClick = (index: number) => {
+        if (squareValues[index]) return
         const newSquareValues = squareValues.slice()
-        newSquareValues[index] = 'X'
+        newSquareValues[index] = isFirstPlayer ? 'X' : 'O'
+        setIsFirstPlayer(!isFirstPlayer)
         setSquareValues(newSquareValues)
     }
 
