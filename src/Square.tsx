@@ -1,16 +1,13 @@
-import { useState } from 'react'
+type SquareProps = {
+    value: string | null
+    onClick: () => void
+}
 
-export default function Square() {
-    const [val, setVal] = useState<string | null>(null)
-
-    const handleClick = () => {
-        setVal('X')
-    }
-
+export default function Square(props: SquareProps) {
     return (
         <>
-            <button className="square" onClick={handleClick}>
-                {val}
+            <button className="square" onClick={props.onClick}>
+                {props.value}
             </button>
         </>
     )
