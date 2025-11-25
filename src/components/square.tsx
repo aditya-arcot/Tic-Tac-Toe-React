@@ -1,7 +1,4 @@
-type SquareProps = {
-    value: string | null
-    onClick: () => void
-}
+import type { SquareProps } from '../types'
 
 export default function Square(props: SquareProps) {
     return (

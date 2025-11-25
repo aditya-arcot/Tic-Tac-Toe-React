@@ -1,9 +1,9 @@
-import Board from './Board'
+import Game from './game'
 
 function App() {
     return (
         <>
-            <Board />
+            <Game />
         </>
     )
 }
