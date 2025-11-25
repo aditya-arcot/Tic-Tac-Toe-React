@@ -19,7 +19,8 @@ export default function Game() {
     }
 
     const moves = history.map((_, move) => {
-        if (move === history.length - 1) return <></>
+        if (move === currentMove)
+            return <div style={{ fontSize: 14 }}>Current Move</div>
 
         let desc
         if (move > 0) {
