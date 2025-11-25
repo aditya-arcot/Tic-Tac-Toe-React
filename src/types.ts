@@ -11,3 +11,9 @@ export type SquareProps = {
     onClick: () => void
     highlight: boolean
 }
+
+export type GameResult = {
+    gameOver: boolean
+    winner?: string
+    winningLine?: number[]
+}

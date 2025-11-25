@@ -1,6 +1,6 @@
-import type { SquareValue } from './types'
+import type { GameResult, SquareValue } from './types'
 
-export const calculateWinner = (squares: SquareValue[]) => {
+export const getGameResult = (squares: SquareValue[]): GameResult => {
     const lines = [
         [0, 1, 2],
         [3, 4, 5],
@@ -19,10 +19,13 @@ export const calculateWinner = (squares: SquareValue[]) => {
             squares[a] === squares[c]
         ) {
             return {
+                gameOver: true,
                 winner: squares[a],
-                line: lines[i],
+                winningLine: lines[i],
             }
         }
     }
-    return null
+    return {
+        gameOver: squares.every((square) => square),
+    }
 }

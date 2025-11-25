@@ -1,19 +1,21 @@
 import { type ReactElement } from 'react'
 import type { BoardProps } from '../types'
-import { calculateWinner } from '../utils'
+import { getGameResult } from '../utils'
 import Square from './square'
 
 export default function Board({ isFirstPlayer, squares, onTurn }: BoardProps) {
-    const result = calculateWinner(squares)
+    const result = getGameResult(squares)
     let status
     if (result?.winner) {
         status = 'Winner: ' + result.winner
-    } else {
+    } else if (!result.gameOver) {
         status = 'Next player: ' + (isFirstPlayer ? 'X' : 'O')
+    } else {
+        status = 'Game Over: Draw'
     }
 
     const handleClick = (index: number) => {
-        if (squares[index] || calculateWinner(squares)) return
+        if (squares[index] || getGameResult(squares).gameOver) return
         const newSquareValues = squares.slice()
         newSquareValues[index] = isFirstPlayer ? 'X' : 'O'
         onTurn(newSquareValues)
@@ -21,7 +23,7 @@ export default function Board({ isFirstPlayer, squares, onTurn }: BoardProps) {
 
     const getHighlight = (index: number): boolean => {
         if (!result) return false
-        return result.line.includes(index)
+        return result.winningLine?.includes(index) ?? false
     }
 
     const rows: ReactElement[] = []
