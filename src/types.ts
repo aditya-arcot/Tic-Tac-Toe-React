@@ -1,18 +1,18 @@
 export type SquareValue = string | null
 
-export type BoardProps = {
+export interface BoardProps {
     isFirstPlayer: boolean
     squares: SquareValue[]
     onTurn: (squares: SquareValue[]) => void
 }
 
-export type SquareProps = {
+export interface SquareProps {
     value: string | null
     onClick: () => void
     highlight: boolean
 }
 
-export type GameResult = {
+export interface GameResult {
     gameOver: boolean
     winner?: string
     winningLine?: number[]

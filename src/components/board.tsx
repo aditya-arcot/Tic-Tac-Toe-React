@@ -6,7 +6,7 @@ import Square from './square'
 export default function Board({ isFirstPlayer, squares, onTurn }: BoardProps) {
     const result = getGameResult(squares)
     let status
-    if (result?.winner) {
+    if (result.winner) {
         status = 'Winner: ' + result.winner
     } else if (!result.gameOver) {
         status = 'Next player: ' + (isFirstPlayer ? 'X' : 'O')
@@ -22,7 +22,6 @@ export default function Board({ isFirstPlayer, squares, onTurn }: BoardProps) {
     }
 
     const getHighlight = (index: number): boolean => {
-        if (!result) return false
         return result.winningLine?.includes(index) ?? false
     }
 
@@ -35,7 +34,9 @@ export default function Board({ isFirstPlayer, squares, onTurn }: BoardProps) {
                 <Square
                     key={idx}
                     value={squares[idx]}
-                    onClick={() => handleClick(idx)}
+                    onClick={() => {
+                        handleClick(idx)
+                    }}
                     highlight={getHighlight(idx)}
                 />
             )

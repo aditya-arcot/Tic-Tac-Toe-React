@@ -11,8 +11,8 @@ export const getGameResult = (squares: SquareValue[]): GameResult => {
         [0, 4, 8],
         [2, 4, 6],
     ]
-    for (let i = 0; i < lines.length; i++) {
-        const [a, b, c] = lines[i]
+    for (const line of lines) {
+        const [a, b, c] = line
         if (
             squares[a] &&
             squares[a] === squares[b] &&
@@ -21,7 +21,7 @@ export const getGameResult = (squares: SquareValue[]): GameResult => {
             return {
                 gameOver: true,
                 winner: squares[a],
-                winningLine: lines[i],
+                winningLine: line,
             }
         }
     }
