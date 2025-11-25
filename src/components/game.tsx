@@ -7,6 +7,7 @@ export default function Game() {
         Array(9).fill(null),
     ])
     const [currentMove, setCurrentMove] = useState(0)
+    const [ascending, setAscending] = useState(true)
 
     const isFirstPlayer = currentMove % 2 === 0
     const squares = history.at(currentMove)!
@@ -18,12 +19,7 @@ export default function Game() {
     }
 
     const moves = history.map((_, move) => {
-        if (move === history.length - 1)
-            return (
-                <li key={move}>
-                    <div style={{ fontSize: 14 }}>Current Move</div>
-                </li>
-            )
+        if (move === history.length - 1) return <></>
 
         let desc
         if (move > 0) {
@@ -33,11 +29,12 @@ export default function Game() {
         }
 
         return (
-            <li key={move}>
+            <div>
                 <button onClick={() => handleJump(move)}>{desc}</button>
-            </li>
+            </div>
         )
     })
+    const orderedMoves = ascending ? moves : [...moves].reverse()
 
     function handleJump(move: number) {
         setCurrentMove(move)
@@ -53,7 +50,13 @@ export default function Game() {
                 />
             </div>
             <div className="game-info">
-                <ol>{moves}</ol>
+                <button
+                    style={{ marginBottom: 5 }}
+                    onClick={() => setAscending(!ascending)}
+                >
+                    Toggle Move Order
+                </button>
+                {orderedMoves}
             </div>
         </div>
     )
