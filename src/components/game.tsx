@@ -18,6 +18,13 @@ export default function Game() {
     }
 
     const moves = history.map((_, move) => {
+        if (move === history.length - 1)
+            return (
+                <li key={move}>
+                    <div style={{ fontSize: 14 }}>Current Move</div>
+                </li>
+            )
+
         let desc
         if (move > 0) {
             desc = 'Go to move #' + move
