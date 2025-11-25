@@ -20,22 +20,21 @@ export default function Board({ isFirstPlayer, squares, onTurn }: BoardProps) {
     }
 
     const rows: ReactElement[] = []
-    for (let i = 0; i < 3; i++) {
+    for (let row = 0; row < 3; row++) {
+        const cols: ReactElement[] = []
+        for (let col = 0; col < 3; col++) {
+            const idx = row * 3 + col
+            cols.push(
+                <Square
+                    key={idx}
+                    value={squares[idx]}
+                    onClick={() => handleClick(idx)}
+                />
+            )
+        }
         rows.push(
-            // safe to use index as key since rows are static
-            <div className="board-row" key={i}>
-                <Square
-                    value={squares[i * 3]}
-                    onClick={() => handleClick(i * 3)}
-                />
-                <Square
-                    value={squares[i * 3 + 1]}
-                    onClick={() => handleClick(i * 3 + 1)}
-                />
-                <Square
-                    value={squares[i * 3 + 2]}
-                    onClick={() => handleClick(i * 3 + 2)}
-                />
+            <div className="board-row" key={row}>
+                {cols}
             </div>
         )
     }
