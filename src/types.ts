@@ -9,4 +9,5 @@ export type BoardProps = {
 export type SquareProps = {
     value: string | null
     onClick: () => void
+    highlight: boolean
 }

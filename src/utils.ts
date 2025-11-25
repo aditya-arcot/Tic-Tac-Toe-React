@@ -1,6 +1,6 @@
 import type { SquareValue } from './types'
 
-export const calculateWinner = (squareValues: SquareValue[]): string | null => {
+export const calculateWinner = (squares: SquareValue[]) => {
     const lines = [
         [0, 1, 2],
         [3, 4, 5],
@@ -14,11 +14,14 @@ export const calculateWinner = (squareValues: SquareValue[]): string | null => {
     for (let i = 0; i < lines.length; i++) {
         const [a, b, c] = lines[i]
         if (
-            squareValues[a] &&
-            squareValues[a] === squareValues[b] &&
-            squareValues[a] === squareValues[c]
+            squares[a] &&
+            squares[a] === squares[b] &&
+            squares[a] === squares[c]
         ) {
-            return squareValues[a]
+            return {
+                winner: squares[a],
+                line: lines[i],
+            }
         }
     }
     return null

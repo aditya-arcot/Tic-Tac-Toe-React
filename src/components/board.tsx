@@ -4,10 +4,10 @@ import { calculateWinner } from '../utils'
 import Square from './square'
 
 export default function Board({ isFirstPlayer, squares, onTurn }: BoardProps) {
-    const winner = calculateWinner(squares)
+    const result = calculateWinner(squares)
     let status
-    if (winner) {
-        status = 'Winner: ' + winner
+    if (result?.winner) {
+        status = 'Winner: ' + result.winner
     } else {
         status = 'Next player: ' + (isFirstPlayer ? 'X' : 'O')
     }
@@ -17,6 +17,11 @@ export default function Board({ isFirstPlayer, squares, onTurn }: BoardProps) {
         const newSquareValues = squares.slice()
         newSquareValues[index] = isFirstPlayer ? 'X' : 'O'
         onTurn(newSquareValues)
+    }
+
+    const getHighlight = (index: number): boolean => {
+        if (!result) return false
+        return result.line.includes(index)
     }
 
     const rows: ReactElement[] = []
@@ -29,6 +34,7 @@ export default function Board({ isFirstPlayer, squares, onTurn }: BoardProps) {
                     key={idx}
                     value={squares[idx]}
                     onClick={() => handleClick(idx)}
+                    highlight={getHighlight(idx)}
                 />
             )
         }
